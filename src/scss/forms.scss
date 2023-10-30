@@ -1,0 +1,18 @@
+body {
+  background: aliceblue;
+
+  #app {
+    padding: 20px;
+
+    .box {
+      padding: 8px;
+      border: 2px solid silver;
+      border-radius: 2px;
+      margin: 8px 0;
+
+      p {
+        line-height: 1.5;
+      }
+    }
+  }
+}

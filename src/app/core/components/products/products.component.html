@@ -1,0 +1,16 @@
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3 gap-x-4 gap-y-1" *ngIf="products;else noProducts">
+  <div *ngFor="let product of products" class="box">
+    <p>ArtNb: {{product.id}}</p>
+    <p>ArtName: {{product.name}}</p>
+    <p>ArtPrice: {{ product.price | number:'1.2-2'}} €</p>
+    <p>Description: {{product.description}}</p>
+    <p>
+      <button (click)="onClickAddToBasket(product)">Add to basket</button>
+      <span>&nbsp;&nbsp;</span>
+      <button (click)="onClickRemoveFromBasket(product)">Remove from basket</button>
+    </p>
+  </div>
+</div>
+<ng-template #noProducts>
+  <div>There are no products.</div>
+</ng-template>

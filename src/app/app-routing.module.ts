@@ -1,10 +1,41 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {bootstrapApplication} from "@angular/platform-browser";
+import {
+  PreloadAllModules,
+  provideRouter,
+  Routes,
+  withDebugTracing,
+  withPreloading
+} from '@angular/router';
 
-const routes: Routes = [];
+import {AppComponent} from "./app.component";
+import {ProductsComponent} from "./core/components/products/products.component";
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+const APP_ROUTES: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'products'
+  },
+  {
+    path: 'products',
+    component: ProductsComponent
+  },
+  {
+    path: 'basket',
+    loadComponent: () =>
+      import('./features/basket/basket.component')
+        .then(m => m.BasketComponent)
+  },
+  {
+    path: '**', redirectTo: 'products', 'pathMatch': 'full'
+  }
+];
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(APP_ROUTES,
+      withPreloading(PreloadAllModules),
+      withDebugTracing()
+    )
+  ]
+});

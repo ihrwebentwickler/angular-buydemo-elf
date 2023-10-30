@@ -1,0 +1,29 @@
+<div>
+  <h3>Your current basket:</h3>
+  <div *ngIf="basketItems && basketItems.length > 0">
+    <div *ngFor="let item of basketItems" class="box">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div>
+          <span class="align-sub">{{item.product.name}}</span>
+        </div>
+        <div>
+          <button (click)="onClickAddAmount(item)">Add</button>
+          <span>&nbsp;&nbsp;</span>
+          <button (click)="onClickSubstractAmount(item)">Del</button>
+          <button *ngIf="item.amount === 0" (click)="onClickRemoveProduct(item)">RM</button>
+        </div>
+        <div>
+          <span class="align-sub">
+            Amount: 300, Single-Price: 18 €<br>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="mt-2">
+      <p><b>Total: 244 €</b></p>
+    </div>
+  </div>
+  <ng-template #emptyBasket>
+    <p>No items in basket.</p>
+  </ng-template>
+</div>
